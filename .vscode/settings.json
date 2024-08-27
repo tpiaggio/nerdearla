@@ -1,10 +1,6 @@
 {
     "IDX.aI.enableInlineCompletion": true,
-<<<<<<< HEAD
     "IDX.aI.enableCodebaseIndexing": true,
     "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnSave": true
-=======
-    "IDX.aI.enableCodebaseIndexing": true
->>>>>>> c506c42 (Add base mui layout with upload button)
 }

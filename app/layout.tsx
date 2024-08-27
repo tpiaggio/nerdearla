@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-<<<<<<< HEAD
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import theme from "./theme";
-=======
-import { ThemeProvider, CssBaseline } from '@mui/material'; 
-import theme from './theme';
->>>>>>> c506c42 (Add base mui layout with upload button)
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,15 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-<<<<<<< HEAD
         <ThemeProvider theme={theme}>
           <CssBaseline />
           {children}
-=======
-      <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {children} 
->>>>>>> c506c42 (Add base mui layout with upload button)
         </ThemeProvider>
       </body>
     </html>
