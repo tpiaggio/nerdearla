@@ -10,6 +10,7 @@
     pkgs.nodePackages.pnpm
     pkgs.bun
   ];
+  
   # Sets environment variables in the workspace
   env = {};
   idx = {

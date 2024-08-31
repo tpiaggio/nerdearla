@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Container, Typography, Box } from "@mui/material";
-import Upload from "./component/upload";
+import UploadContainer from './uploadContainer';
 
 export default function Home() {
   return (
@@ -46,7 +46,7 @@ export default function Home() {
           <Typography variant="subtitle1" gutterBottom>
             Una versión de Gemini para las amantes del fútbol.
           </Typography>
-          <Upload />
+          <UploadContainer />
         </Box>
       </Container>
     </>
