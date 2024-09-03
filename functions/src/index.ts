@@ -54,9 +54,9 @@ export const imageAnalisysFlow = onFlow(
       // 403. If your app client uses the Cloud Functions for Firebase callable
       // functions feature, the library automatically attaches this header to
       // requests.
-      if (!user) {
-        throw new Error("Authenticated user required to run flow");
-      }
+      // if (!user) {
+      //   throw new Error("Authenticated user required to run flow");
+      // }
     }),
   },
   async ({url, contentType}) => {
