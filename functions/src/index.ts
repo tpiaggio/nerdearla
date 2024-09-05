@@ -16,7 +16,7 @@ import { googleAI, gemini15Flash } from "@genkit-ai/googleai";
 // From the Firebase plugin, import the functions needed to deploy flows using
 // Cloud Functions.
 import { firebaseAuth } from "@genkit-ai/firebase/auth";
-import { onFlow } from "@genkit-ai/firebase/functions";
+import { onFlow, noAuth } from "@genkit-ai/firebase/functions";
 
 configureGenkit({
   plugins: [
@@ -48,17 +48,7 @@ export const imageAnalisysFlow = onFlow(
       contentType: z.string(),
     }),
     outputSchema: z.string(),
-    authPolicy: firebaseAuth((user) => {
-      // By default, the firebaseAuth policy requires that all requests have an
-      // `Authorization: Bearer` header containing the user's Firebase
-      // Authentication ID token. All other requests are rejected with error
-      // 403. If your app client uses the Cloud Functions for Firebase callable
-      // functions feature, the library automatically attaches this header to
-      // requests.
-      // if (!user) {
-      //   throw new Error("Authenticated user required to run flow");
-      // }
-    }),
+    authPolicy: noAuth(),
   },
   async ({ url, contentType }) => {
     // Construct a request and send it to the model API.
