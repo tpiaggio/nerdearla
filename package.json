@@ -1,21 +1,31 @@
 {
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "next start",
+    "build": "next build",
+    "build:watch": "tsc --watch",
+    "dev": "next dev",
+    "lint": "next lint"
+  },
   "name": "out",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@genkit-ai/ai": "^0.5.12",
+    "@genkit-ai/core": "^0.5.12",
+    "@genkit-ai/dotprompt": "^0.5.12",
+    "@genkit-ai/flow": "^0.5.12",
+    "@genkit-ai/googleai": "^0.5.12",
     "@mui/icons-material": "^6.0.0",
     "@mui/material": "^6.0.0",
+    "express": "^4.19.2",
+    "firebase": "^10.13.1",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
@@ -26,6 +36,6 @@
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.5.4"
   }
 }
