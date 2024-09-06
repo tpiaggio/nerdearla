@@ -15,8 +15,7 @@ import {googleAI, gemini15Flash} from "@genkit-ai/googleai";
 
 // From the Firebase plugin, import the functions needed to deploy flows using
 // Cloud Functions.
-// import { firebaseAuth } from "@genkit-ai/firebase/auth";
-import {onFlow, noAuth} from "@genkit-ai/firebase/functions";
+import {noAuth, onFlow} from "@genkit-ai/firebase/functions";
 
 configureGenkit({
   plugins: [
@@ -36,9 +35,9 @@ configureGenkit({
 });
 
 // Define a simple flow that prompts an LLM to generate menu suggestions.
-export const imageAnalisysFlow = onFlow(
+export const imageAnalysisFlow = onFlow(
   {
-    name: "imageAnalisysFlow",
+    name: "imageAnalysisFlow",
     httpsOptions: {
       cors: "*",
       secrets: [googleAIapiKey],

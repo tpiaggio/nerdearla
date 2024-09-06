@@ -1,0 +1,26 @@
+import { Container, Typography, Box } from "@mui/material";
+import Image from "next/image";
+
+export default function Footer() {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "absolute",
+        bottom: "20px",
+        // Suggested code may be subject to a license. Learn more: ~LicenseLog:1033732685.
+        width: "100%",
+        gap: "20px",
+        maxWidth: "100vw",
+        overflow: "hidden",
+      }}
+    >
+      <Image src="/nerd-animated.svg" width={50} height={50} alt="Nerd logo" />
+      <Image src="/idx.png" width={150} height={150} alt="IDX logo" />
+      <Image src="/googleCloud.svg" width={150} height={150} alt="Google Cloud logo" />
+      <Image src="/firebase.svg" width={150} height={150} alt="Firebase logo" />
+    </Box>
+  );
+}

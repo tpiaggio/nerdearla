@@ -78,7 +78,7 @@ export default function Upload({ onFileChange, onImgUrlChange, onReadyToUpload }
         component="label" // Makes the button act as a label for the file input
         startIcon={<UploadIcon />}
       >
-        Upload
+        Image Upload
         <input type="file" hidden accept="image/*" multiple={false} onChange={handleFileChange} />
       </Button>
     </Box>

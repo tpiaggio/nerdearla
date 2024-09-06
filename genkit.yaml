@@ -1,0 +1,5 @@
+# genkit.yaml
+functions:
+  path: functions  # Path to your functions directory
+frontend:
+  path: app
