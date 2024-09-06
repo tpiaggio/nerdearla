@@ -13,11 +13,6 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@genkit-ai/ai": "^0.5.12",
-    "@genkit-ai/core": "^0.5.12",
-    "@genkit-ai/dotprompt": "^0.5.12",
-    "@genkit-ai/flow": "^0.5.12",
-    "@genkit-ai/googleai": "^0.5.12",
     "@mui/icons-material": "^6.0.0",
     "@mui/material": "^6.0.0",
     "express": "^4.19.2",
