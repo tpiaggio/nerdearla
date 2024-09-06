@@ -5,15 +5,9 @@ import Upload, { type onReadyProps } from "./component/upload";
 import { useState, useCallback } from "react";
 import { initializeApp } from "firebase/app";
 import { getFunctions, httpsCallable } from "firebase/functions";
+import { FIREBASE_APP_CONFIG } from "./config";
 
-const app = initializeApp({
-  apiKey: process.env.NEXT_PUBLIC_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_APP_ID,
-});
+const app = initializeApp(FIREBASE_APP_CONFIG);
 const functions = getFunctions(app);
 
 const imageAnalysisFlow = httpsCallable(functions, "imageAnalysisFlow");
@@ -24,8 +18,7 @@ const apiCall = async (data: onReadyProps): Promise<string> => {
     contentType: data.contentType,
   });
 
-  console.log(result);
-  return "The Gemini text response goes here.";
+  return `${result || ""}`;
 };
 
 export default function InteractionContainer() {
