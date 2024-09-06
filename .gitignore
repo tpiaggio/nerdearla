@@ -38,4 +38,5 @@ next-env.d.ts
 # Log files
 *.log
 
-.keys
+# Private keys should not be commited.
+.idx/.env.nix

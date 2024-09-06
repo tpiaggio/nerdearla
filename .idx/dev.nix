@@ -1,6 +1,16 @@
 # To learn more about how to use Nix to configure your environment
 # see: https://developers.google.com/idx/guides/customize-idx-env
-{pkgs}: {
+#
+# Create a file ".env.nix" with the following syntax to work:
+# {
+#   GOOGLE_GENAI_API_KEY = "private_key";
+#   FIREBASE_PROD_KEY = "private_key";
+# }
+# ATTENTION: Do not commit the file with the key.
+{pkgs}: 
+let
+  env = import ./.env.nix;
+in {
   # Which nixpkgs channel to use.
   channel = "stable-23.11"; # or "unstable"
   # Use https://search.nixos.org/packages to find packages
@@ -14,7 +24,7 @@
   
   # Sets environment variables in the workspace
   env = {
-    GOOGLE_GENAI_API_KEY = "";
+    GOOGLE_GENAI_API_KEY = env.GOOGLE_GENAI_API_KEY;
     ACCESS_CONTROL_ALLOW_CREDENTIALS = "true";
     ACCESS_CONTROL_ALLOW_ORIGIN = "*";
     ACCESS_CONTROL_ALLOW_METHODS = "GET,OPTIONS,PATCH,DELETE,POST,PUT";
