@@ -1,22 +1,22 @@
 import * as z from "zod";
 
 // Import the Genkit core libraries and plugins.
-import { generate } from "@genkit-ai/ai";
-import { configureGenkit } from "@genkit-ai/core";
-import type { Part } from "@genkit-ai/ai/model";
-import { firebase } from "@genkit-ai/firebase";
-import { defineSecret } from "firebase-functions/params";
+import {generate} from "@genkit-ai/ai";
+import {configureGenkit} from "@genkit-ai/core";
+import type {Part} from "@genkit-ai/ai/model";
+import {firebase} from "@genkit-ai/firebase";
+import {defineSecret} from "firebase-functions/params";
 
 const googleAIapiKey = defineSecret("GOOGLE_GENAI_API_KEY");
 
 // Import models from the Google AI plugin. The Google AI API provides access to
 // several generative models. Here, we import Gemini 1.5 Flash.
-import { googleAI, gemini15Flash } from "@genkit-ai/googleai";
+import {googleAI, gemini15Flash} from "@genkit-ai/googleai";
 
 // From the Firebase plugin, import the functions needed to deploy flows using
 // Cloud Functions.
-import { firebaseAuth } from "@genkit-ai/firebase/auth";
-import { onFlow, noAuth } from "@genkit-ai/firebase/functions";
+// import { firebaseAuth } from "@genkit-ai/firebase/auth";
+import {onFlow, noAuth} from "@genkit-ai/firebase/functions";
 
 configureGenkit({
   plugins: [
@@ -50,7 +50,7 @@ export const imageAnalisysFlow = onFlow(
     outputSchema: z.string(),
     authPolicy: noAuth(),
   },
-  async ({ url, contentType }) => {
+  async ({url, contentType}) => {
     // Construct a request and send it to the model API.
     const parts: Part[] = [
       {
