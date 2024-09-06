@@ -4,27 +4,22 @@ import { Container, Box } from "@mui/material";
 import Upload, { type onReadyProps } from "./component/upload";
 import { useState, useCallback } from "react";
 import { initializeApp } from "firebase/app";
-import { getFunctions, httpsCallable, connectFunctionsEmulator } from "firebase/functions";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 const app = initializeApp({
-  apiKey: "",
-  authDomain: "nerdearla-workshop.firebaseapp.com",
-  projectId: "nerdearla-workshop",
-  storageBucket: "nerdearla-workshop.appspot.com",
-  messagingSenderId: "693219596825",
-  appId: "1:693219596825:web:70b9361c200af6160ee888",
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
 });
 const functions = getFunctions(app);
-connectFunctionsEmulator(
-  functions,
-  "3100-idx-nerdearla-1724776699374.cluster-t23zgfo255e32uuvburngnfnn4.cloudworkstations.dev",
-  3100,
-);
 
-const imageAnalisysFlow = httpsCallable(functions, "imageAnalisysFlow");
+const imageAnalysisFlow = httpsCallable(functions, "imageAnalysisFlow");
 
 const apiCall = async (data: onReadyProps): Promise<string> => {
-  const { data: result } = await imageAnalisysFlow({
+  const { data: result } = await imageAnalysisFlow({
     url: data.url,
     contentType: data.contentType,
   });
