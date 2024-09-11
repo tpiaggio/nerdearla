@@ -4,7 +4,6 @@
 # Create a file ".env.nix" with the following syntax to work:
 # {
 #   GOOGLE_GENAI_API_KEY = "private_key";
-#   FIREBASE_PROD_KEY = "private_key";
 # }
 # ATTENTION: Do not commit the file with the key.
 {pkgs}: 
@@ -43,6 +42,7 @@ in {
       # To run something each time the workspace is (re)started, use the `onStart` hook
       onStart = {
         genkit-start = "cd functions && genkit start";
+        genkit-watch = "cd functions && npm run build:watch";
       };
     };
     # Enable previews and customize configuration
