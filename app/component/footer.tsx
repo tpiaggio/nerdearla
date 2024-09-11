@@ -1,4 +1,4 @@
-import { Container, Typography, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import Image from "next/image";
 
 export default function Footer() {
@@ -10,7 +10,6 @@ export default function Footer() {
         alignItems: "center",
         position: "absolute",
         bottom: "20px",
-        // Suggested code may be subject to a license. Learn more: ~LicenseLog:1033732685.
         width: "100%",
         gap: "20px",
         maxWidth: "100vw",
