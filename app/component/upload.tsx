@@ -5,7 +5,8 @@ import UploadIcon from "@mui/icons-material/Upload";
 import { useState, useCallback, useEffect } from "react";
 import { type ImageCompressionOptions, resizeAndCompressImage } from "../utils/image";
 import { getBlobUrl } from "../utils/file";
-import { IMG_MAX_DIMENSION, IMG_QUALITY } from "../config";
+import { IMG_MAX_DIMENSION, IMG_QUALITY } from "../../lib/config";
+import SignOutButton from "./signOutButton";
 
 export interface onReadyProps {
   /** The base64 encoded image url. */
@@ -72,7 +73,7 @@ export default function Upload({ onFileChange, onImgUrlChange, onReadyToUpload }
   }, []);
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+    <Box display="flex" alignItems="center" justifyContent="space-between">
       <Button
         variant="contained"
         component="label" // Makes the button act as a label for the file input
@@ -81,6 +82,7 @@ export default function Upload({ onFileChange, onImgUrlChange, onReadyToUpload }
         Image Upload
         <input type="file" hidden accept="image/*" multiple={false} onChange={handleFileChange} />
       </Button>
+      <SignOutButton />
     </Box>
   );
 }

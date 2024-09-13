@@ -1,15 +1,12 @@
 "use client";
 
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import Upload, { type onReadyProps } from "./component/upload";
 import { useState, useCallback } from "react";
-import { initializeApp } from "firebase/app";
-import { getFunctions, httpsCallable } from "firebase/functions";
-import { FIREBASE_APP_CONFIG } from "./config";
+import { httpsCallable } from "firebase/functions";
 import InteractionContainer from "./component/interactionContainer";
-
-const app = initializeApp(FIREBASE_APP_CONFIG);
-const functions = getFunctions(app);
+import {functions} from "../lib/firebase";
+import useSession from "@/hooks/useSession";
 
 /**
  * Firebase function to analyze images.
@@ -27,6 +24,7 @@ const apiCall = async (data: onReadyProps): Promise<string> => {
 export default function UploadContainer() {
   const [imgSrc, setImgSrc] = useState<string>("");
   const [geminiResponse, setGeminiResponse] = useState<string>("");
+  const user = useSession();
 
   /**
    * Sets the user uploaded high resolution image URL, and clears the Gemini response.
@@ -46,10 +44,24 @@ export default function UploadContainer() {
     setGeminiResponse(text);
   }, []);
 
+  if (!user) {
+    return (
+      <Typography variant="subtitle1" gutterBottom>
+        Inicia sesión para subir una imagen.
+      </Typography>
+    );
+  }
+
   return (
-    <Container>
-      <Upload onImgUrlChange={onUpdateImgUrl} onReadyToUpload={onReadyToUpload} />
-      {imgSrc && <InteractionContainer imgSrc={imgSrc} geminiResponse={geminiResponse} />}
-    </Container>
+    <>
+      <Typography variant="subtitle1" gutterBottom>
+        Utiliza el botón "Subir imagen" para enviar una foto de un equipo relacionado con el
+        fútbol y obtén información de Gemini sobre los equipos que aparecen en la imagen.
+      </Typography>
+      <Container>
+        <Upload onImgUrlChange={onUpdateImgUrl} onReadyToUpload={onReadyToUpload} />
+        {imgSrc && <InteractionContainer imgSrc={imgSrc} geminiResponse={geminiResponse} />}
+      </Container>
+    </>
   );
 }
