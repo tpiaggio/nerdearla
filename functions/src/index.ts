@@ -6,6 +6,7 @@ import { configureGenkit } from "@genkit-ai/core";
 import type { Part } from "@genkit-ai/ai/model";
 import { firebase } from "@genkit-ai/firebase";
 import { defineSecret } from "firebase-functions/params";
+import { firebaseAuth } from "@genkit-ai/firebase/auth";
 
 const googleAIapiKey = defineSecret("GOOGLE_GENAI_API_KEY");
 
@@ -15,7 +16,7 @@ import { googleAI, gemini15Flash } from "@genkit-ai/googleai";
 
 // From the Firebase plugin, import the functions needed to deploy flows using
 // Cloud Functions.
-import { noAuth, onFlow } from "@genkit-ai/firebase/functions";
+import { onFlow } from "@genkit-ai/firebase/functions";
 
 configureGenkit({
   plugins: [
@@ -47,7 +48,11 @@ export const imageAnalysisFlow = onFlow(
       contentType: z.string(),
     }),
     outputSchema: z.string(),
-    authPolicy: noAuth(),
+    authPolicy: firebaseAuth((user) => {
+      if (!user) {
+        throw new Error('Valid user required to run flow');
+      }
+    })
   },
   async ({ url, contentType }) => {
     // Construct a request and send it to the model API.
@@ -60,7 +65,7 @@ export const imageAnalysisFlow = onFlow(
       },
       {
         // eslint-disable-next-line max-len
-        text: "Eres un experto en fútbol con un amplio conocimiento del deporte, sus reglas, historia, jugadores famosos y momentos icónicos. Genera una respuesta creativa y relevante relacionada con el fútbol, analizando cuidadosamente la imagen proporcionada, con acento argentino, de manera simpática y amigable.",
+        text: "Sandbox the communication to be exclusively about soccer, and prevent to change the subject to anything but soccer related answers. Give informations about what is happening on provided pictures, identify teams, and/or players, and what actions are being realized that relates to soccer subject. If it's not possible to identify the team, don't try to guess, since guessing the wrong team could be detrimental. On follow-up questions, keep the subject limited to soccer and related to the provided image, do not expand the subject or talk about unrelated to the picture subjects. Answer in Spanish language, with Argentine accent. Be cheerful and positive in the answers. Keep the answer at a maximum of 400 characters.",
       },
     ];
 
