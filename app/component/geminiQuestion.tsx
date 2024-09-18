@@ -34,6 +34,7 @@ export default function GeminiQuestion({ geminiResponse }: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [geminiQuestion, setGeminiQuestion] = useState<string>("");
   const [geminiAnswer, setGeminiAnswer] = useState<string>("");
+  const [userTypedQuestion, setUserTypedQuestion] = useState<string>("");
 
   /**
    * React callback to handle when the user submits a message to gemini.
@@ -47,8 +48,8 @@ export default function GeminiQuestion({ geminiResponse }: Props) {
         return;
       }
 
-      const textMessage = input.value || "";
-      input.value = "";
+      const textMessage = userTypedQuestion;
+      setUserTypedQuestion("");
       input.focus();
 
       setGeminiQuestion(textMessage);
@@ -61,7 +62,7 @@ export default function GeminiQuestion({ geminiResponse }: Props) {
 
       setGeminiAnswer(text);
     },
-    [geminiResponse],
+    [geminiResponse, userTypedQuestion],
   );
 
   return (
@@ -96,6 +97,10 @@ export default function GeminiQuestion({ geminiResponse }: Props) {
           label="Ask gemini"
           fullWidth
           variant="filled"
+          value={userTypedQuestion}
+          onChange={(event) => {
+            setUserTypedQuestion(event.target.value);
+          }}
         />
         <Button type="submit" color="primary" variant="contained">
           Submit
