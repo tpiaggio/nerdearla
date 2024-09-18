@@ -8,12 +8,13 @@ export default function Footer() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        position: "absolute",
         bottom: "20px",
         width: "100%",
         gap: "20px",
         maxWidth: "100vw",
         overflow: "hidden",
+        mt: 2,
+        alignSelf: 'flex-end'
       }}
     >
       <Image src="/nerd-animated.svg" width={50} height={50} alt="Nerd logo" />
