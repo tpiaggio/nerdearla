@@ -9,7 +9,6 @@ import { getFunctions, httpsCallable } from "firebase/functions";
 import { FIREBASE_APP_CONFIG } from "../lib/config";
 import useSession from "@/hooks/useSession";
 import InteractionContainer from "./component/interactionContainer";
-import GeminiQuestion from "./component/geminiQuestion";
 
 const app = initializeApp(FIREBASE_APP_CONFIG);
 const functions = getFunctions(app);
@@ -67,7 +66,6 @@ export default function UploadContainer() {
         </Typography>
         <Upload onImgUrlChange={onUpdateImgUrl} onReadyToUpload={onReadyToUpload} />
         {imgSrc && <InteractionContainer imgSrc={imgSrc} geminiResponse={geminiResponse} />}
-        {geminiResponse && <GeminiQuestion geminiResponse={geminiResponse} />}
       </Stack>
     </Container>
   );
