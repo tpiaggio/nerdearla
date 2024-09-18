@@ -5,7 +5,7 @@
     "build": "next build",
     "build:watch": "tsc --watch",
     "dev": "next dev",
-    "lint": "next lint"
+    "lint": "biome lint"
   },
   "name": "out",
   "version": "0.1.0",

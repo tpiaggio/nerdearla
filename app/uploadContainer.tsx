@@ -1,12 +1,18 @@
 "use client";
 
-import { Container, Typography } from "@mui/material";
+import { Container, TextField, Typography, Skeleton, Button, Stack } from "@mui/material";
 import Upload, { type onReadyProps } from "./component/upload";
-import { useState, useCallback } from "react";
-import { httpsCallable } from "firebase/functions";
-import InteractionContainer from "./component/interactionContainer";
-import {functions} from "../lib/firebase";
+import type React from "react";
+import { useState, useCallback, useRef } from "react";
+import { initializeApp } from "firebase/app";
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { FIREBASE_APP_CONFIG } from "../lib/config";
 import useSession from "@/hooks/useSession";
+import InteractionContainer from "./component/interactionContainer";
+import GeminiQuestion from "./component/geminiQuestion";
+
+const app = initializeApp(FIREBASE_APP_CONFIG);
+const functions = getFunctions(app);
 
 /**
  * Firebase function to analyze images.
@@ -16,7 +22,7 @@ const imageAnalysisFlow = httpsCallable(functions, "imageAnalysisFlow");
 /**
  * Firebase API call to imageAnalysisFlow.
  */
-const apiCall = async (data: onReadyProps): Promise<string> => {
+const callImageAnalysisFlow = async (data: onReadyProps): Promise<string> => {
   const { data: result = "" } = await imageAnalysisFlow(data);
   return `${result}`;
 };
@@ -40,7 +46,7 @@ export default function UploadContainer() {
    */
   const onReadyToUpload = useCallback(async (data: onReadyProps) => {
     // Request gemini to interpret the image and return a text.
-    const text = await apiCall(data);
+    const text = await callImageAnalysisFlow(data);
     setGeminiResponse(text);
   }, []);
 
@@ -53,15 +59,16 @@ export default function UploadContainer() {
   }
 
   return (
-    <>
-      <Typography variant="subtitle1" gutterBottom>
-        Utiliza el botón "Subir imagen" para enviar una foto de un equipo relacionado con el
-        fútbol y obtén información de Gemini sobre los equipos que aparecen en la imagen.
-      </Typography>
-      <Container>
+    <Container>
+      <Stack spacing={2}>
+        <Typography variant="subtitle1" gutterBottom>
+          Utiliza el botón "Subir imagen" para enviar una foto de un equipo relacionado con el
+          fútbol y obtén información de Gemini sobre los equipos que aparecen en la imagen.
+        </Typography>
         <Upload onImgUrlChange={onUpdateImgUrl} onReadyToUpload={onReadyToUpload} />
         {imgSrc && <InteractionContainer imgSrc={imgSrc} geminiResponse={geminiResponse} />}
-      </Container>
-    </>
+        {geminiResponse && <GeminiQuestion geminiResponse={geminiResponse} />}
+      </Stack>
+    </Container>
   );
 }
