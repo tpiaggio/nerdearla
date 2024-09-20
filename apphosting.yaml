@@ -1,0 +1,23 @@
+# Settings for Cloud Run
+runConfig:
+  maxInstances: 10
+
+# Environment variables and secrets
+env:
+  - variable: NEXT_PUBLIC_API_KEY
+    secret: FIREBASE_API_KEY
+
+  - variable: NEXT_PUBLIC_AUTH_DOMAIN
+    value: nerdearla-workshop.firebaseapp.com
+
+  - variable: NEXT_PUBLIC_PROJECT_ID
+    value: nerdearla-workshop
+
+  - variable: NEXT_PUBLIC_STORAGE_BUCKET
+    value: nerdearla-workshop.appspot.com
+
+  - variable: NEXT_PUBLIC_MESSAGING_SENDER_ID
+    value: 693219596825
+
+  - variable: NEXT_PUBLIC_APP_ID
+    value: 1:693219596825:web:70b9361c200af6160ee888
